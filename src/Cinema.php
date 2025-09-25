@@ -1,21 +1,39 @@
 <?php
+declare(strict_types=1);
 
 namespace Icine\Sistema;
 
-abstract class Cinema {
-    private string $nomeCinema;
-    private string $cnpj;
+class Cinema
+{
+    private string $nome;
+    /** @var Sala[] */
+    private array $salas = [];
 
-    public function __construct(string $nomeCinema, string $cnpj) {
-        $this->nomeCinema = $nomeCinema;
-        $this->cnpj = $cnpj;
+    public function __construct(string $nome)
+    {
+        $this->nome = $nome;
     }
 
-    protected function getNomeCinema() : string {
-        return $this->nomeCinema;
+    public function getNome(): string
+    {
+        return $this->nome;
     }
 
-    protected function getCnpj() : string {
-        return $this->cnpj;
+    public function adicionarSala(Sala $sala): void
+    {
+        $this->salas[$sala->getNumero()] = $sala;
+    }
+
+    /**
+     * @return Sala[]
+     */
+    public function getSalas(): array
+    {
+        return array_values($this->salas);
+    }
+
+    public function obterSala(int $numero): ?Sala
+    {
+        return $this->salas[$numero] ?? null;
     }
 }

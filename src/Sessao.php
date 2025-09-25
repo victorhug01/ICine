@@ -1,25 +1,60 @@
 <?php
+declare(strict_types=1);
 
 namespace Icine\Sistema;
 
-use Icine\Sistema\Cinema;
+class Sessao
+{
+    private string $id;
+    private Filme $filme;
+    private Sala $sala;
+    private \DateTimeImmutable $horario;
+    /** @var Ingresso[] */
+    private array $ingressos = [];
 
-class Sessao extends Cinema {
-    private string $horario;
-    private string $ingresso;
-
-    public function __construct(string $nomeCinema, string $cnpj, string $ingresso, string $horario) {
-        parent::__construct($nomeCinema, $cnpj);
+    public function __construct(string $id, Filme $filme, Sala $sala, \DateTimeImmutable $horario)
+    {
+        $this->id = $id;
+        $this->filme = $filme;
+        $this->sala = $sala;
         $this->horario = $horario;
-        $this->ingresso = $ingresso;
     }
 
-    public function getHorario(): string {
+    public function getId(): string
+    {
+        return $this->id;
+    }
+
+    public function getFilme(): Filme
+    {
+        return $this->filme;
+    }
+
+    public function getSala(): Sala
+    {
+        return $this->sala;
+    }
+
+    public function getHorario(): \DateTimeImmutable
+    {
         return $this->horario;
     }
 
-    public function getIngresso(): string {
-        return $this->ingresso;
+    public function adicionarIngresso(Ingresso $ingresso): void
+    {
+        $this->ingressos[$ingresso->getNumero()] = $ingresso;
     }
 
+    /**
+     * @return Ingresso[]
+     */
+    public function getIngressos(): array
+    {
+        return array_values($this->ingressos);
+    }
+
+    public function isLotada(): bool
+    {
+        return count($this->ingressos) >= $this->sala->getCapacidade();
+    }
 }
