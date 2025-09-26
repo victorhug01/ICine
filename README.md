@@ -1,3 +1,9 @@
+## Nome e RA
+- Nicolas Emanuel Pinheiro - 2039083 
+- Miguel Venancio de Oliveira 2038422
+- Miguel Vinicius de Oliveira Ferreira 2038440
+- Victor Hugo Barros Baptista Pereira - 2042140
+
 # Icine - Sistema de Cinema (CLI)
 
 Bem-vindo ao Icine! Este é um sistema simples de cinema para terminal, onde você pode criar cinemas, salas, filmes, sessões e vender ingressos de forma interativa.
